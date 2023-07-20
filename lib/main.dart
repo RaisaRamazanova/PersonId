@@ -4,7 +4,14 @@ void main() => runApp( MaterialApp(
     home: PersonCard(),
 ));
 
-class PersonCard extends StatelessWidget {
+class PersonCard extends StatefulWidget {
+  @override
+  State<PersonCard> createState() => _PersonCardState();
+}
+
+class _PersonCardState extends State<PersonCard> {
+  int personLevel = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,6 +22,15 @@ class PersonCard extends StatelessWidget {
         backgroundColor: Colors.grey[850],
         elevation: 0,
       ) ,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState( () {
+            personLevel += 1;
+          });
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Colors.grey[800],
+      ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(30, 40, 30, 0),
         child: Column(
@@ -57,7 +73,7 @@ class PersonCard extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-                '8',
+                '$personLevel',
                 style: TextStyle(
                   color: Colors.amberAccent[200],
                   letterSpacing: 2,
